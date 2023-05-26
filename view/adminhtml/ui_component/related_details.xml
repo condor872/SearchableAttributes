@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Ui/etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">related_details.related_details_list_data_source</item>
+            <item name="deps" xsi:type="string">related_details.related_details_list_data_source</item>
+        </item>
+        <item name="spinner" xsi:type="string">related_details_records_columns</item>
+    </argument>
+    <dataSource name="related_details_list_data_source">
+        <settings>
+            <storageConfig>
+                <param name="cacheRequests" xsi:type="boolean">false</param>
+            </storageConfig>
+        </settings>
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">condor872\SearchableAttributes\DataProvider\Attributes\RelatedDetails</argument>
+            <argument name="name" xsi:type="string">related_details_list_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">attribute_id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+    <container name="listing_top">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="template" xsi:type="string">ui/grid/toolbar</item>
+                <item name="stickyTmpl" xsi:type="string">ui/grid/sticky/toolbar</item>
+            </item>
+        </argument>
+        <filters name="listing_filters">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="columnsProvider" xsi:type="string">related_details.related_details.related_details_records_columns</item>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="provider" xsi:type="string">related_details.related_details.listing_top.bookmarks</item>
+                        <item name="namespace" xsi:type="string">current.filters</item>
+                    </item>
+                    <item name="templates" xsi:type="array">
+                        <item name="filters" xsi:type="array">
+                            <item name="select" xsi:type="array">
+                                <item name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</item>
+                                <item name="template" xsi:type="string">ui/grid/filters/elements/ui-select</item>
+                                <item name="filterOptions" xsi:type="boolean">true</item>
+                                <!--<item name="showCheckbox" xsi:type="boolean">false</item>
+                                <item name="labelsDecoration" xsi:type="boolean">true</item>
+                                <item name="optgroupLabels" xsi:type="boolean">true</item>
+                                <item name="lastSelectable" xsi:type="boolean">true</item>-->
+                            </item>
+                        </item>
+                    </item>
+                    <item name="childDefaults" xsi:type="array">
+                        <item name="provider" xsi:type="string">related_details.related_details.listing_top.listing_filters</item>
+                        <item name="imports" xsi:type="array">
+                            <item name="visible" xsi:type="string">related_details.related_details.related_details_records_columns.${ $.index }:visible</item>
+                        </item>
+                    </item>
+                </item>
+                <item name="observers" xsi:type="array">
+                    <item name="column" xsi:type="string">column</item>
+                </item>
+            </argument>
+        <filterSelect name="attribute_id_option" provider="${ $.parentName }" component="Magento_Ui/js/form/element/ui-select" template="ui/grid/filters/elements/ui-select">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="filterOptions" xsi:type="boolean">true</item>
+                        <item name="levelsVisibility" xsi:type="number">1</item>
+                        <item name="showCheckbox" xsi:type="boolean">true</item>
+                        <item name="labelsDecoration" xsi:type="boolean">true</item>
+                        <item name="optgroupLabels" xsi:type="boolean">false</item>
+                        <item name="lastSelectable" xsi:type="boolean">true</item>
+                    </item>
+                </argument>
+                <settings>
+                    <!--<options class="condor872\SunskyConnector\Model\Sources\GetSunskyCategoriesOptionsTree"/>-->
+                    <caption translate="true">– Seleziona –</caption>
+                    <label translate="true">Opzioni di Questo Attributo</label>
+                    <dataScope>attribute_id_option</dataScope>
+                    <imports>
+                        <link name="options">related_details.related_details_list_data_source:data.settings.options.attribute_id_option</link>
+                    </imports>
+                </settings>
+        </filterSelect>
+        </filters>
+        <massaction name="listing_massaction">
+            <action name="edit"> 
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">edit</item>
+                        <item name="label" xsi:type="string" translate="true">Edit</item>
+                        <item name="callback" xsi:type="array">
+                            <item name="provider" xsi:type="string">related_details.related_details.related_details_records_columns_editor</item>
+                            <item name="target" xsi:type="string">editSelected</item>
+                        </item>
+                    </item> 
+                </argument>
+            </action>
+        </massaction>
+        <paging name="listing_paging">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="provider" xsi:type="string">related_details.related_details.listing_top.bookmarks</item>
+                        <item name="namespace" xsi:type="string">current.paging</item>
+                    </item>
+                    <item name="selectProvider" xsi:type="string">related_details.related_details.related_details_records_columns.ids</item>
+                </item>
+            </argument>
+        </paging>
+    </container>
+    <columns name="related_details_records_columns">
+        <settings>
+            <editorConfig>
+                <param name="indexField" xsi:type="string">attribute_id_option</param>
+                <param name="enabled" xsi:type="boolean">true</param>
+                <param name="selectProvider" xsi:type="string">related_details.related_details.related_details_records_columns.ids</param>-
+                <param name="bulkConfig" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/editing/bulk</item>
+                    <item name="template" xsi:type="string">ui/grid/editing/bulk</item>
+                </param>
+                <param name="bulkEnabled" xsi:type="boolean">false</param>
+                <param name="clientConfig" xsi:type="array">
+                    <item name="saveUrl" xsi:type="url" path="searchoptions/saverelatedoptions/inlineedit"/>
+                    <item name="validateBeforeSave" xsi:type="boolean">false</item>
+                </param>
+            </editorConfig>
+            <childDefaults>
+                <param name="fieldAction" xsi:type="array">
+                    <item name="provider" xsi:type="string">related_details.related_details.related_details_records_columns_editor</item>
+                    <item name="target" xsi:type="string">startEdit</item>
+                    <item name="params" xsi:type="array">
+                        <item name="0" xsi:type="string">${ $.$data.rowIndex }</item>
+                        <item name="1" xsi:type="boolean">true</item>
+                    </item>
+                </param>
+            </childDefaults>
+        </settings>
+        <selectionsColumn name="ids">
+           <argument name="data" xsi:type="array">
+               <item name="config" xsi:type="array">
+                   <item name="indexField" xsi:type="string">attribute_id_option</item>
+                   <item name="sorting" xsi:type="string">desc</item>
+                   <item name="sortOrder" xsi:type="number">0</item>
+               </item>
+           </argument>
+       </selectionsColumn>
+        <column name="attribute_id_option" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <dataType>select</dataType>
+                <label translate="true">Opzioni di Questo Attributo</label>
+                <visible>true</visible>
+                <imports>
+                    <link name="options">${ $.provider }:data.settings.options.attribute_id_option</link>
+                </imports>
+            </settings>
+        </column>
+       <column name="related_attribute_id_option" component="Magento_Ui/js/grid/columns/select">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="links" xsi:type="array">
+                        <item name="options" xsi:type="string">${ $.provider }:data.settings.options.related_attribute_id_option</item>
+                    </item>
+                    <item name="exports" xsi:type="array">
+                        <item name="options" xsi:type="string">related_details.related_details.related_details_records_columns_editor_bulk.related_attribute_id_option:options</item>
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>select</dataType>
+                <label translate="true">Opzioni Mappate con Attributo Correlato</label>
+                <visible>true</visible>
+                <editor>
+                    <editorType>select</editorType>
+                </editor>
+            </settings>
+        </column>
+        <column name="is_mapped" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <dataType>select</dataType>
+                <label translate="true">E' mappato</label>
+                <filter>select</filter>
+                <visible>true</visible>
+                <options>
+                    <option name="0" xsi:type="array">
+                        <item name="value" xsi:type="number">0</item>
+                        <item name="label" xsi:type="string" translate="true">NO</item>
+                    </option>
+                    <option name="1" xsi:type="array">
+                        <item name="value" xsi:type="number">1</item>
+                        <item name="label" xsi:type="string" translate="true">Si</item>
+                    </option>
+                </options>
+            </settings>
+        </column>
+    </columns>
+</listing>

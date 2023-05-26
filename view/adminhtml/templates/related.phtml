@@ -1,0 +1,60 @@
+<script>
+require(['jquery','uiRegistry','Magento_Ui/js/modal/modal'],function($,uiRegistry,modal){
+    $(document).ready(function() {
+        $(document).on('change', ".event_onchange", function() {
+            runfunction($(this));
+        });
+        jQuery(document).on('DOMSubtreeModified', ".event_onchange", function() {
+            runfunction($(this));
+        });
+        $(document).on('click', ".event_click", function() {
+            runfunction($(this));
+        });
+        $(document).on('click', "[data-action='grid-filter-expand']", function() {
+            $(this).attr("type","button");
+        });
+        $(document).on('click', "button.action-multicheck-toggle", function() {
+            $(this).attr("type","button");
+        });
+        $(document).on('click', "button.action-select", function() {
+            $(this).attr("type","button");
+        });
+    });
+    //qua iniziano le mie funzioni
+    function getUiRegistry(index){
+        return uiRegistry.get(index);
+    }
+
+    function mappedsfunctions(function_name){
+        var funcs = {
+            'checkempty': checkempty,
+            'savebaserule': savebaserule,
+            'setmodal': setmodal,
+            'desctemplate': desctemplate,
+            'rendermodalattributes' : rendermodalattributes,
+            'redirect': redirect,
+            'openmodalattributes': openmodalattributes,
+            'saveattributeconfig':saveattributeconfig,
+            'togglefield' : togglefield
+        };
+        return funcs;
+    }
+
+    function runfunction(object){
+        var functionsmapped=mappedsfunctions();
+        var classes=object.attr("class");
+        var classiarray=classes.split(' ');
+        $.each(classiarray, function(index, function_name) {
+                var functionlow=function_name.toLowerCase();
+                if (functionlow.includes('function_')){
+                    var callingfunction=functionlow.split('_')[1];
+                    if (callingfunction in functionsmapped){
+                        functionsmapped[callingfunction](object);
+                    }
+                }
+            });
+    }
+
+
+});
+</script>

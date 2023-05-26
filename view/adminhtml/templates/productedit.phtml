@@ -1,0 +1,52 @@
+<script>
+require(['jquery','uiRegistry','Magento_Ui/js/modal/modal'],function($,uiRegistry,modal){
+    $(document).ready(function() {
+        setFields();
+        $(document).on('change', ".dependent_check", function() {
+            console.log(($(this)));
+        });/*
+        jQuery(document).on('DOMSubtreeModified', ".event_onchange", function() {
+            runfunction($(this));
+        });
+        $(document).on('click', ".event_click", function() {
+            runfunction($(this));
+        });
+        $(document).on('click', "[data-action='grid-filter-expand']", function() {
+            $(this).attr("type","button");
+        });
+        $(document).on('click', "button.action-multicheck-toggle", function() {
+            $(this).attr("type","button");
+        });
+        $(document).on('click', "button.action-select", function() {
+            $(this).attr("type","button");
+        });*/
+    });
+    //qua iniziano le mie funzioni
+    function getUiRegistry(index){
+        return uiRegistry.get(index);
+    }
+
+    function getDataProvider(){
+        return getUiRegistry("product_form.product_form_data_source");
+    }
+
+    function getrelationsdata(){
+        var relations = getDataProvider();
+        console.log(relations);
+    }
+
+    function setFields(){
+        var entity_id_exsist=false;
+        var existCondition = setInterval(function() {
+            if (getDataProvider() !== undefined) {
+                clearInterval(existCondition);
+                getrelationsdata();
+            }
+        }, 100);
+    }
+
+    
+
+
+});
+</script>

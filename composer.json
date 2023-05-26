@@ -1,0 +1,22 @@
+{
+    "name": "condor872/searchableattributes",
+    "description": "Create Searchable Attributes",
+    "type": "magento2-module",
+    "license": "GPL-3.0",
+    "authors": [
+        {
+            "name": "Giuseppe Mostaccio",
+            "email": "giuseppe.mostaccio87@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "condor872\\SearchableAttributes\\": ""
+        }
+    }
+}

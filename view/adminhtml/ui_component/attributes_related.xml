@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">attributes_related.attributes_related_data_source</item>
+            <item name="deps" xsi:type="string">attributes_related.attributes_related_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Employee Information</item>
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">attributes_related</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <dataSource name="attributes_related_data_source">
+        <settings>
+            <storageConfig>
+                <param name="cacheRequests" xsi:type="boolean">false</param>
+            </storageConfig>
+        </settings>
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">condor872\SearchableAttributes\DataProvider\Attributes\Related</argument>
+            <argument name="name" xsi:type="string">attributes_related_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">attribute_id</argument>
+            <argument name="requestFieldName" xsi:type="string">attribute_id</argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+    <fieldset name="related">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="collapsible" xsi:type="boolean">false</item>
+                <item name="label" xsi:type="string" translate="true">Attributi Correlati</item>
+                <item name="sortOrder" xsi:type="number">20</item>
+                <item name="imports" xsi:type="array">
+                    <item name="optionsrelated" xsi:type="string">${ $.provider }:data.general.settings.related_attribute_id.options</item>
+                </item>
+                <item name="exports" xsi:type="array">
+                    <item name="optionsrelated" xsi:type="string">attributes_related.attributes_related.related.related_attribute_id:options</item>
+                </item>
+        	</item>
+        </argument>
+        <field name="related_attribute_id">
+                <argument name="data" xsi:type="array">
+                    <!--<item name="options" xsi:type="object">condor872\Patterns\Model\Config\Source\Attributesets</item>-->
+                    <item name="options" xsi:type="array"></item>
+                    <item name="config" xsi:type="array">
+                        <!--<item name="additionalClasses" xsi:type="string">event_onchange function_checkempty</item>-->
+                        <item name="dataType" xsi:type="string">text</item>
+                        <item name="label" xsi:type="string" translate="true">Attributo Correlato</item>
+                        <item name="componentType" xsi:type="string">field</item>
+                        <item name="formElement" xsi:type="string">select</item>
+                        <item name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</item>
+                        <item name="elementTmpl" xsi:type="string">ui/grid/filters/elements/ui-select</item>
+                        <item name="dataScope" xsi:type="string">general.related_attribute_id</item>
+                        <item name="filterOptions" xsi:type="boolean">true</item>
+                        <item name="showCheckbox" xsi:type="boolean">true</item>
+                        <item name="disableLabel" xsi:type="boolean">true</item>
+                        <item name="multiple" xsi:type="boolean">false</item>
+                        <item name="levelsVisibility" xsi:type="number">1</item>
+                        <item name="sortOrder" xsi:type="number">10</item>
+                        <item name="required" xsi:type="boolean">false</item>
+                        <item name="listens" xsi:type="array">
+                            <item name="${ $.namespace }.${ $.namespace }:responseData" xsi:type="string">setParsed</item>
+                        </item>
+                        <item name="imports" xsi:type="array">
+                            <item name="disabled" xsi:type="string">${ $.provider }:data.general.settings.related_attribute_id.disabled</item>
+                            <item name="additionalInfo" xsi:type="string">${ $.provider }:data.general.settings.related_attribute_id.additionalInfo</item>
+                        </item>
+                        <item name="exports" xsi:type="array">
+                            <item name="value" xsi:type="string">${ $.provider }:data.related_attribute_id</item>
+                        </item>
+                    </item>
+                </argument>
+        </field>
+        <field name="relatedhidden">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="formElement" xsi:type="string">hidden</item>
+                    <item name="label" xsi:type="string" translate="true">Nome Template</item>
+                    <item name="dataScope" xsi:type="string">${ "related_attribute_id" }</item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+    <fieldset name="grid_related">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="collapsible" xsi:type="boolean">false</item>
+                <item name="label" xsi:type="string" translate="true">Opzioni Correlate</item>
+                <item name="sortOrder" xsi:type="number">30</item>
+                <item name="imports" xsi:type="array">
+                    <item name="visible" xsi:type="string">${ $.provider }:data.general.settings.grid_related.visibility</item>
+                </item>
+        	</item>
+        </argument>
+        <insertListing name="related_details">
+            <settings>
+                <dataLinks>
+                    <exports>false</exports>
+                    <imports>true</imports>
+                </dataLinks>
+                <autoRender>true</autoRender>
+                <selectionsProvider>related_details.related_details.related_details_records_columns.ids</selectionsProvider>
+                <externalProvider>related_details.related_details_list_data_source</externalProvider>
+                <dataScope>related_details</dataScope>
+                <ns>related_details</ns>
+                <exports>
+                    <link name="attribute_id">${ $.externalProvider }:params.attribute_id</link>
+                    <link name="related_attribute_id">${ $.externalProvider }:params.related_attribute_id</link>
+                </exports>
+                <imports>
+                    <link name="attribute_id">${ $.provider }:data.general.attribute_id</link>
+                    <link name="related_attribute_id">${ $.provider }:data.general.related_attribute_id</link>
+                </imports>
+            </settings>
+        </insertListing>
+    </fieldset>
+    <!--<fieldset name="options_inside">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="collapsible" xsi:type="boolean">false</item>
+                <item name="label" xsi:type="string" translate="true">Opzioni Attributo</item>
+                <item name="sortOrder" xsi:type="number">100</item>
+        	</item>
+        </argument>
+        <insertListing name="attribute_options_grid">
+            <settings>
+                <dataLinks>
+                    <exports>false</exports>
+                    <imports>true</imports>
+                </dataLinks>
+                <autoRender>true</autoRender>
+                <selectionsProvider>attribute_options_grid.attribute_options_grid.attribute_options_grid_records_columns.ids</selectionsProvider>
+                <externalProvider>attribute_options_grid.attribute_options_grid_list_data_source</externalProvider>
+                <dataScope>attribute_options_grid</dataScope>
+                <ns>attribute_options_grid</ns>
+                <exports>
+                    <link name="attribute_id">${ $.externalProvider }:params.attribute_id</link>
+                </exports>
+                <imports>
+                    <link name="attribute_id">${ $.provider }:data.general.attribute_id</link>
+                </imports>
+            </settings>
+        </insertListing>
+    </fieldset>-->
+</form>

@@ -1,0 +1,6 @@
+.select_related{
+    width: 300px;
+}
+* {
+    box-sizing: border-box !important;
+}

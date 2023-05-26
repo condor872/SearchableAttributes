@@ -1,0 +1,6 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="condor872_SearchableAttributes::manager" title="Gestione Attributi" module="condor872_SearchableAttributes" sortOrder="30" resource="condor872_SearchableAttributes::manager" />
+        <add id="condor872_SearchableAttributes::options_grid" title="Gestione Opzioni" module="condor872_SearchableAttributes" sortOrder="20" parent="condor872_SearchableAttributes::manager" action="searchoptions/attributesgrid/index" resource="condor872_SearchableAttributes::options_grid"/>
+    </menu>
+</config>

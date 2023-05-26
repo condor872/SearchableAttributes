@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="Magento\Catalog\Ui\DataProvider\Product\Form\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="testAttribute" xsi:type="array">
+                    <item name="class" xsi:type="string">condor872\SearchableAttributes\Ui\DataProvider\Product\Form\Modifier\Attributes</item>
+                    <item name="sortOrder" xsi:type="number">1000</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+	<type name="Magento\Catalog\Block\Adminhtml\Product\Attribute\Edit\Tab\Front">
+        <plugin name="condor872_SearchableAttributes" type="condor872\SearchableAttributes\Plugin\Block\Adminhtml\Product\Attribute\Edit\Tab\Front" sortOrder="1"/>
+    </type>
+    <type name="Magento\Catalog\Block\Adminhtml\Product\Attribute\Edit\Tabs">
+        <plugin name="condor872_SearchableAttributes::Related"
+                type="condor872\SearchableAttributes\Plugin\Block\Adminhtml\Product\Attribute\Edit\Tabs" sortOrder="2"/>
+    </type>
+    <preference for="Magento\Ui\Component\Form\Element\Select" type="condor872\Core\Ui\Component\Form\Element\Select" />
+    <preference for="Magento\Ui\Component\Listing\Columns\Column" type="condor872\Core\Ui\Component\Listing\Columns\Column" />
+
+</config>
