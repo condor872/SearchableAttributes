@@ -9,7 +9,6 @@
             "email": "giuseppe.mostaccio87@gmail.com"
         }
     ],
-    "minimum-stability": "stable",
     "require": {},
     "autoload": {
         "files": [
